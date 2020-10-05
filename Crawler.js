@@ -6,9 +6,10 @@ const { JSDOM } = jsdom;
 class Crawler {
     constructor(url){
         this.url            = url;
+        this.tld            = url.replace('http://', '')
         this.internalLinks  = [];
         this.externalLinks  = [];
-        this.crawlDocuments = [];
+        this.document       = {};
     }
 
     async crawlPage(){
@@ -37,6 +38,14 @@ class Crawler {
                 this.externalLinks.push(link.href);
             } else {}
         });
+
+        this.document = {
+            url           : this.url,
+            tld           : this.tld,
+            internalLinks : this.internalLinks,
+            externalLinks : this.externalLinks,
+            canonical     : this.canonical
+        }
     }
 };
 

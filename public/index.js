@@ -15,7 +15,7 @@ const createElement = (element, attributes={}) => {
 }
 
 // fetch crawl data
-const getData = async (url) => {
+const startCrawl = async (url) => {
     const options = {
         method : 'POST',
         headers: {
@@ -25,26 +25,38 @@ const getData = async (url) => {
     }
     const data = await fetch('/crawler', options);
     const res  = await data.json();
+    console.log(res);
 
-    let ul            = createElement('ul')
-    let title         = createElement('li', {textContent:`Title: ${res.title}`});
-    let canonical     = createElement('li', {textContent:`Canonical: ${res.canonical}`});
-    let internalLinks = createElement('li', {textContent:`Internal links: ${res.internalLinks.toString()}`});
-    let externalLinks = createElement('li', {textContent:`External links: ${res.externalLinks.toString()}`});
+    // let ul            = createElement('ul')
+    // let title         = createElement('li', {textContent:`Title: ${res.title}`});
+    // let canonical     = createElement('li', {textContent:`Canonical: ${res.canonical}`});
+    // let internalLinks = createElement('li', {textContent:`Internal links: ${res.internalLinks.toString()}`});
+    // let externalLinks = createElement('li', {textContent:`External links: ${res.externalLinks.toString()}`});
 
-    ul.append(title, canonical, internalLinks, externalLinks);
-    ouput.appendChild(ul);
+    // ul.append(title, canonical, internalLinks, externalLinks);
+    // ouput.appendChild(ul);
 }
+
+
 
 
 // listen to form submit
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const url = document.getElementById('url').value;
+    let url = document.getElementById('url').value;
     console.log(url);
 
-    getData(url);
+    startCrawl(url);
+
+    const timer = setInterval(async () => {
+        url = url.replace('http://', '')
+        const data = await fetch(`./crawler/${url}`);
+        const res  = await data.json();
+        console.log(res);
+    }, 3000)
+
+    
 })
 
 

@@ -3,10 +3,30 @@ const Crawler = require('./Crawler.js');
 const express = require('express');
 const app     = express();
 
+// global crawl data
+const documents  = {};
+const crawlObj = {}; 
+
 // Express app set up
 app.listen(3000, () => console.log('listening at port 3000'));
 app.use(express.static('public'));
 app.use(express.json({limit: '1mb'}));
+
+
+const startCrawler = (url) => {
+    let crawlArray = crawlObj[url];
+
+    // loop through crawl list and crawl the pages
+    for (let i = 0; i < crawlArray.length; i++) {
+        const element = crawlArray[i];
+        
+        let page = new Crawler(element);
+        page.crawlPage()
+            .then(res => {
+                documents[url].push(page.document);
+            });
+    }
+}
 
 
 // post API
@@ -18,22 +38,24 @@ app.post('/crawler', (request, response) => {
     
     // create instance of class
     let page = new Crawler(url);
+    documents[page.tld] = {}
 
-    // crawl the page
     page.crawlPage()
         .then(res => {
-            console.log(res);
+            documents[page.tld] = [];
+            documents[page.tld].push(page.document);
+            response.json(documents);
 
-            // return crawl data to frontend
-            response.json(
-                {
-                    title        : page.title,
-                    canonical    : page.canonical,
-                    internalLinks: page.internalLinks,
-                    externalLinks: page.externalLinks
-                })
+            // append first documents to crawl list
+            crawlObj[page.tld] = page.internalLinks;
+            startCrawler(page.tld);
         });
 })
 
 
+// get API
+app.get('/crawler/:url', (req, res) => {
+    let url = req.params.url;
+    res.json(documents[`${url+'/'}`]);
+})
 

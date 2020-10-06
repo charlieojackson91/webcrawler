@@ -25,26 +25,32 @@ class Crawler {
     extractSEO(){
         let dom = new JSDOM(this.html);
 
-        this.title         = dom.window.document.querySelector("title").textContent;
-        this.canonical     = dom.window.document.querySelector("link[rel='canonical']").getAttribute("href");
-        
-        let links = dom.window.document.querySelectorAll('a')
-        links     = Array.from(links);
-        
-        links.forEach(link => {
-            if (link.href.includes(this.url) & !this.internalLinks.includes(link.href)){
-                this.internalLinks.push(link.href);
-            } else if (!link.href.includes(this.url) & !this.externalLinks.includes(link.href)) {
-                this.externalLinks.push(link.href);
-            } else {}
-        });
+        try {
+            this.title         = dom.window.document.querySelector("title").textContent;
+            this.canonical     = dom.window.document.querySelector("link[rel='canonical']").getAttribute("href");
+            
+            let links = dom.window.document.querySelectorAll('a')
+            links     = Array.from(links);
+            
+            links.forEach(link => {
+                if (link.href.includes(this.url) & !this.internalLinks.includes(link.href)){
+                    this.internalLinks.push(link.href);
+                } else if (!link.href.includes(this.url) & !this.externalLinks.includes(link.href)) {
+                    this.externalLinks.push(link.href);
+                } else {}
+            });
 
-        this.document = {
-            url           : this.url,
-            tld           : this.tld,
-            internalLinks : this.internalLinks,
-            externalLinks : this.externalLinks,
-            canonical     : this.canonical
+            this.document = {
+                url           : this.url,
+                title         : this.title,
+                tld           : this.tld,
+                internalLinks : this.internalLinks,
+                externalLinks : this.externalLinks,
+                canonical     : this.canonical
+            }
+
+        } catch {
+            console.log('crawl failed', this.url)
         }
     }
 };

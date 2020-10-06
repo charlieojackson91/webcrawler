@@ -19,17 +19,19 @@ const startCrawler = (url) => {
     // loop through crawl list and crawl the pages
     for (let i = 0; i < crawlArray.length; i++) {
         const element = crawlArray[i];
+        console.log('crawling page:', element);
         
         let page = new Crawler(element);
         page.crawlPage()
             .then(res => {
-                // page.internalLinks.forEach(link => {
-                //     if (crawlArray.includes(link)){
-
-                //     } else {
-                //         crawlArray.push(crawlArray)  
-                //     }
-                // })
+                page.internalLinks.forEach(link => {
+                    if (crawlArray.includes(link)){
+                        // console.log('already in array', link)
+                    } else {
+                        console.log('found new URL', link)
+                        crawlArray.push(crawlArray)  
+                    }
+                })
                 documents[url].push(page.document);
             });
     }
@@ -54,7 +56,7 @@ app.post('/crawler', (request, response) => {
             response.json(documents);
 
             // append first documents to crawl list
-            crawlObj[page.tld] = page.internalLinks;
+            crawlObj[page.tld] = [...page.internalLinks];
             startCrawler(page.tld);
         });
 })

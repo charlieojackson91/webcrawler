@@ -23,6 +23,13 @@ const startCrawler = (url) => {
         let page = new Crawler(element);
         page.crawlPage()
             .then(res => {
+                // page.internalLinks.forEach(link => {
+                //     if (crawlArray.includes(link)){
+
+                //     } else {
+                //         crawlArray.push(crawlArray)  
+                //     }
+                // })
                 documents[url].push(page.document);
             });
     }

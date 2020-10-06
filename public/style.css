@@ -1,0 +1,141 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.docCont {
+    width: 80%;
+    margin: auto;
+    min-height: 100%;
+    margin-bottom: -55px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+   
+    padding: 2px 0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* search bar */
+.headCont {
+    text-align: center;
+}
+
+#tagline {
+    font-weight: bold;
+}
+
+#url {
+    width: 70%;
+    padding: 5px;
+}
+
+#submit {
+    width: 10%;
+    padding: 5px;
+    min-width: 150px;
+}
+
+#submit:hover {
+    cursor: pointer;
+}
+
+/* visual select */
+.visual{
+    margin-top: 20px;
+    display: flex;
+}
+
+.btnCont {
+    min-width: 150px;
+    margin-right: 10px;
+}
+
+.btn {
+    width: 100%;
+    background-color: teal;
+    border-bottom: 0;
+    font-weight: bolder;
+    font-size: 1.01rem;
+    padding: 2.5px;
+}
+
+.btn:hover {
+    background: transparent;
+    color: teal;
+    cursor: pointer;
+}
+
+#selected {
+    background: silver;
+}
+
+
+.crawlCont {
+    border: 2px solid rgb(59, 15, 59);
+    height: 600px;
+    overflow: scroll;
+}
+
+
+
+/* table styling */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+th {
+    color: teal;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+td {
+    width: 25%;
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}
+
+
+/* footer */
+#footerCont {
+    background: silver;
+    height: 100px;
+    border-top: 1px solid black;
+}
+
+footer {
+    width: 80%;
+    margin: auto;
+    padding: 10px 0;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+}
+
+footer li {
+    list-style: none;
+}
+
+footer a { 
+    display: block;
+}

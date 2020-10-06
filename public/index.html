@@ -3,17 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web crawler in the browser</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Web crawler</title>
 </head>
 <body>
-    <h1>Web crawler in the browser</h1>
-    <form>
-        <input type='text' placeholder='enter URL to crawl' id='url'/>
-        <input type='submit'/>
-    </form>
-    
-    <div class='crawlCont'>
+    <div class="docCont">
+        <div class="headCont">
+            <h1>Crawl your website</h1>
+            <p id='tagline'>Crawl your site*, download a free report and find out how you can improve your SEO.</p>
+            <form>
+                <input type='text' placeholder='enter URL to crawl' id='url'/>
+                <input type='submit' id='submit'/>
+            </form>
+        </div>
 
+        <div class='visual'>
+            <div class='btnCont'>
+                <button class='btn' id='selected'>Table</button>
+            </div>
+            <div class='btnCont'>
+                <button class='btn'>Internal links</button>
+            </div>
+            <div class='btnCont'>
+                <button class='btn'>External links</button>
+            </div>
+            <div class='btnCont'>
+                <button class='btn'>Non indexed pages</button>
+            </div>
+            <div class='btnCont'>
+                <button class='btn'>Canonicalised</button>
+            </div>
+            <div class='btnCont'>
+                <button class='btn'>Href lang</button>
+            </div>
+        </div>
+        
+        <div class='crawlCont'>
+            <table>
+                <tr>
+                    <th>URL</th>
+                    <th>Canonical</th>
+                    <th>Internal links</th>
+                    <th>External links</th>
+                </tr>
+                <tr>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>[http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/,http://charlieojackson.co.uk/]</td>
+                    <td>[]</td>
+                </tr>
+                <tr>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>[http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/,http://charlieojackson.co.uk/]</td>
+                    <td>[]</td>
+                </tr>
+                <tr>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>[http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/,http://charlieojackson.co.uk/]</td>
+                    <td>[]</td>
+                </tr>
+                <tr>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>[http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/,http://charlieojackson.co.uk/]</td>
+                    <td>[]</td>
+                </tr>
+                <tr>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>[http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/,http://charlieojackson.co.uk/]</td>
+                    <td>[]</td>
+                </tr>
+                <tr>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>http://charlieojackson.co.uk/</td>
+                    <td>[http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/, http://charlieojackson.co.uk/,http://charlieojackson.co.uk/]</td>
+                    <td>[]</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <p id='download'>Download crawl report</p>
+            <p>* - free report crawls upto 100 pages. For in depth crawls view our <a href='./custom-crawling'>custom crawling prices.</a></p>
+        </div>
+    </div>
+
+    <div id= 'footerCont'>
+        <footer>
+            <ul>
+                <li><a href='./about'>About this tool</a></li>
+                <li><a href='./how-it-works'>How does this tool work?</a></li>
+                <li><a href='./custom-crawling'>Custom crawling prices</a></li>
+            </ul>
+        </footer>
     </div>
     <script src="./index.js"></script>
 </body>

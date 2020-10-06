@@ -21,6 +21,7 @@ const startCrawler = async (url) => {
         const element = crawlArray[i];
         console.log(`crawling page: ${i}` , element);
         
+
         let page = new Crawler(element);
         let test = await page.crawlPage()
             .then(res => {
@@ -29,7 +30,7 @@ const startCrawler = async (url) => {
                         // console.log('already in array', link)
                     } else {
                         console.log('found new URL', link)
-                        crawlArray.push(crawlArray)  
+                        crawlArray.push(link)  
                     }
                 })
                 documents[url].push(page.document);

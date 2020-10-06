@@ -13,16 +13,16 @@ app.use(express.static('public'));
 app.use(express.json({limit: '1mb'}));
 
 
-const startCrawler = (url) => {
+const startCrawler = async (url) => {
     let crawlArray = crawlObj[url];
 
     // loop through crawl list and crawl the pages
     for (let i = 0; i < crawlArray.length; i++) {
         const element = crawlArray[i];
-        console.log('crawling page:', element);
+        console.log(`crawling page: ${i}` , element);
         
         let page = new Crawler(element);
-        page.crawlPage()
+        let test = await page.crawlPage()
             .then(res => {
                 page.internalLinks.forEach(link => {
                     if (crawlArray.includes(link)){
@@ -35,6 +35,8 @@ const startCrawler = (url) => {
                 documents[url].push(page.document);
             });
     }
+
+    console.log('completed crawling')
 }
 
 

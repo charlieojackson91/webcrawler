@@ -51,6 +51,7 @@ class Crawler {
 
         } catch {
             console.log('crawl failed', this.url)
+            return
         }
     }
 };

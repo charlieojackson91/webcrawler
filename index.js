@@ -3,8 +3,11 @@ const Crawler = require('./Crawler.js');
 const express = require('express');
 const app     = express();
 
-// global crawl data
+
+// documents contain all the webpages that have been crawled i.e. {charlieojackson.co.uk: {}}
 const documents  = {};
+
+// crawl obj is the list of URLs to be crawled - it is added as new pages are found.
 const crawlObj = {}; 
 
 // Express app set up
@@ -37,7 +40,7 @@ const startCrawler = async (url) => {
             });
     }
 
-    console.log('completed crawling')
+    console.log('completed crawling', url);
 }
 
 
@@ -68,6 +71,6 @@ app.post('/crawler', (request, response) => {
 // get API
 app.get('/crawler/:url', (req, res) => {
     let url = req.params.url;
-    res.json(documents[`${url+'/'}`]);
+    res.json(documents[`${url}`]);
 })
 

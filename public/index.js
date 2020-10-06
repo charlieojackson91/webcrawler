@@ -39,8 +39,9 @@ form.addEventListener('submit', (e) => {
 
     startCrawl(url);
 
+    url = new URL(url).host
+
     const timer = setInterval(async () => {
-        url = url.replace('http://', '')
         const data = await fetch(`./crawler/${url}`);
         const res  = await data.json();
         console.log(res);

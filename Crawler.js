@@ -1,17 +1,19 @@
 const fetch     = require('node-fetch');
 const jsdom     = require('jsdom');
 const { JSDOM } = jsdom;
-const urldecode = require('url');
+// const urldecode = require('url');
 
 
 class Crawler {
     constructor(url){
         this.url            = url;
-        this.tld            = url.replace('http://', '');
-        this.host           = urldecode.parse(this.url).host;
+        this.tld            = new URL(this.url).host;
+        this.host           = new URL(this.url).origin;
         this.internalLinks  = [];
         this.externalLinks  = [];
         this.document       = {};
+
+        console.log(this.url, this.tld, this.host)
     }
 
     async crawlPage(){
@@ -34,7 +36,7 @@ class Crawler {
             links     = Array.from(links);
             
             links.forEach(link => {
-                if (link.href.includes(this.host)){
+                if (link.href.startsWith(this.host)){
                     this.internalLinks.push(link.href);
                 } else if (!link.href.includes(this.url) & !this.externalLinks.includes(link.href)) {
                     this.externalLinks.push(link.href);

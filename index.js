@@ -39,7 +39,7 @@ const startCrawler = async (url) => {
                 documents[url].push(page.document);
             });
     }
-
+    documents[url].push({status:1});
     console.log('completed crawling', url);
 }
 

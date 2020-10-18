@@ -1,6 +1,10 @@
 const form  = document.querySelector('form');
 const ouput = document.querySelector('.crawlCont');
+const table = document.querySelector('.crawlTable');
 
+// local crawl array
+crawlDocs  = [];
+crawlCount = 0;
 
 // This function creates the different HTML elements
 const createElement = (element, attributes={}) => {
@@ -13,6 +17,18 @@ const createElement = (element, attributes={}) => {
     })
     return htmlElement;
 }
+
+
+// Append crawl data to DOM
+const appendToDom = (crawlObj) => {
+
+    let row  = table.insertRow(1);
+    let cell = row.insertCell(0);
+    let cell2 = row.insertCell(1)
+
+    cell2.innerHTML  = crawlObj["url"];
+    cell.innerHTML = crawlCount;
+};
 
 // fetch crawl data
 const startCrawl = async (url) => {
@@ -45,6 +61,20 @@ form.addEventListener('submit', (e) => {
         const data = await fetch(`./crawler/${url}`);
         const res  = await data.json();
         console.log(res);
+        res.forEach(crawlObj => {
+            if (crawlObj['status'] == 1){
+                clearInterval(timer);
+                console.log('finished crawling')
+            };
+
+            if (crawlDocs.includes(crawlObj["url"])) {
+                return;
+            } else {
+                appendToDom(crawlObj);
+                crawlDocs.push(crawlObj["url"]);
+                crawlCount = crawlCount + 1;
+            }
+        })
     }, 3000)
     
 })

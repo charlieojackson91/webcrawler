@@ -2,6 +2,7 @@
 const Crawler = require('./Crawler.js');
 const express = require('express');
 const app     = express();
+var cors      = require('cors')
 
 
 // documents contain all the webpages that have been crawled i.e. {charlieojackson.co.uk: {}}
@@ -13,10 +14,12 @@ const crawlObj = {};
 // Express app set up
 app.listen(4000, () => console.log('listening at port 3000'));
 app.use(express.json({limit: '1mb'}));
-
+app.use(cors())
 
 const startCrawler = async (url) => {
+    
     let crawlArray = crawlObj[url];
+    console.log('starting crawler', url, crawlObj)
 
     // loop through crawl list and crawl the pages
     for (let i = 0; i < crawlArray.length; i++) {

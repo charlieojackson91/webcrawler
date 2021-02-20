@@ -27,11 +27,11 @@ function App() {
     
     startCrawl(url);
 
-    // const hostURL = new URL(url).host
-    // console.log('host url', hostURL)
+    const hostURL = new URL(url).host
+    console.log('host url', hostURL)
 
     const timer = setInterval(async () => {
-        const data = await fetch(`http://localhost:4000/crawler/${url}`);
+        const data = await fetch(`http://localhost:4000/crawler/${hostURL}`);
         const res  = await data.json();
         console.log(res);
         res.forEach(crawlObject => {
@@ -41,6 +41,7 @@ function App() {
             };
 
             setCrawlArray([...crawlArray, crawlObject]);
+            console.log('existing crawl data: ',crawlArray, 'new crawl data',crawlObject);
             // if (crawlDocs.includes(crawlObject["url"])) {
             //     return;
             // } else {
@@ -51,7 +52,16 @@ function App() {
     
   }
 
+  const rows = crawlArray.map((item,count) => 
+                  <tr key={count + 1}>
+                    <td>{count + 1}</td>
+                    <td>{item.url}</td>
+                  </tr>
+                );
+
+  // console.log(rows);
   return (
+
         <>
         <div className="docCont">
         <div className="headCont">
@@ -93,14 +103,7 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {
-                  crawlArray.map((item,count) => 
-                    <tr>
-                      <td>{count + 1}</td>
-                      <td>{item.url}</td>
-                    </tr>
-                  )
-                }
+                {rows}
               </tbody>
             </table>
         </div>

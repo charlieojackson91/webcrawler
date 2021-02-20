@@ -11,8 +11,7 @@ const documents  = {};
 const crawlObj = {}; 
 
 // Express app set up
-app.listen(3000, () => console.log('listening at port 3000'));
-app.use(express.static('public'));
+app.listen(4000, () => console.log('listening at port 3000'));
 app.use(express.json({limit: '1mb'}));
 
 
@@ -71,6 +70,7 @@ app.post('/crawler', (request, response) => {
 // get API
 app.get('/crawler/:url', (req, res) => {
     let url = req.params.url;
+    console.log(url)
     res.json(documents[`${url}`]);
 })
 
